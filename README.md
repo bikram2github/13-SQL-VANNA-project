@@ -20,6 +20,7 @@ An AI-powered SQL assistant that converts natural language questions into SQL qu
 
 ```
 
+.
 ├── main.py                 # FastAPI app entry point
 ├── vanna_setup.py         # Agent + LLM + tools setup
 ├── sql_validator.py       # SQL safety validation
@@ -216,3 +217,7 @@ Answer: 200
 * 🧠 Smarter memory retrieval
 * 🌐 Frontend UI integration
 
+---
+
+
+```
