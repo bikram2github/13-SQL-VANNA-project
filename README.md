@@ -1,4 +1,4 @@
-```markdown
+
 # 🧠 SQL AI Agent (Vanna + FastAPI + SQLite)
 
 An AI-powered SQL assistant that converts natural language questions into SQL queries, executes them on a SQLite database, and returns structured answers with optional visualizations.
