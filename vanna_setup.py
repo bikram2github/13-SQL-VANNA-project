@@ -21,7 +21,7 @@ load_dotenv()
 
 
 
-def create_llm(api_key):
+def create_llm():
     
     try :
         llm = OpenAILlmService(
@@ -49,7 +49,7 @@ def create_memory():
     return DemoAgentMemory()
 
 
-def create_tool_registry(runner, memory):
+'''def create_tool_registry(runner, memory):
     tools = [
         RunSqlTool(runner),
         VisualizeDataTool(),
@@ -59,7 +59,7 @@ def create_tool_registry(runner, memory):
         SearchSavedCorrectToolUsesTool()
     ]
 
-    return ToolRegistry(tools)
+    return ToolRegistry(tools)'''
 
 
 class SimpleUserResolver(UserResolver):
@@ -119,9 +119,7 @@ def create_agent(llm, registry, memory, resolver):
 
 
 def setup_vanna():
-    api_key = load_environment()
-
-    llm = create_llm(api_key)
+    llm = create_llm()
     memory = create_memory()
 
     runner = SqliteRunner(database_path="clinic.db")
@@ -143,25 +141,26 @@ def setup_vanna():
         agent_memory=memory
     )
     agent.system_message = """
+        You are a SQLite expert for a clinic management database.
 
-        You are a SQLite expert for a clinic database with these tables:
+        DATABASE SCHEMA:
         - patients(id, first_name, last_name, email, phone, date_of_birth, gender, city, registered_date)
         - doctors(id, name, specialization, department, phone)
         - appointments(id, patient_id, doctor_id, appointment_date, status, notes)
+        - status values: 'Scheduled', 'Completed', 'Cancelled', 'No-Show'
         - treatments(id, appointment_id, treatment_name, cost, duration_minutes)
         - invoices(id, patient_id, invoice_date, total_amount, paid_amount, status)
+        - status values: 'Paid', 'Pending', 'Overdue'
 
-        IMPORTANT:
-        - Always return final answer in this format:
-        - must use bulltet points and markdown formatting for clarity
+        RULES:
+        - Only use columns that exist in the schema above
+        - Always use SQLite-compatible syntax (no TIMESTAMPDIFF, no ISNULL)
+        - For time differences use: (julianday(col2) - julianday(col1)) * 1440
 
-        ANSWER FORMAT:
+        ANSWER FORMAT (always follow this):
         SQL: <query>
         Explanation: <short explanation>
-        Answer: <final number or result>
-
-        - SQL & Answer must ALWAYS be present
-        - NEVER return only tool output
+        Answer: <final result>
         """
     print("Vanna 2.x agent initialized successfully!")
 

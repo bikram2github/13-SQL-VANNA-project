@@ -1,3 +1,7 @@
 .vscode
-f8c88490871f6169
 .env
+__pycache__/
+*.pyc
+venv/
+.idea/
+f8c88490871f6169
