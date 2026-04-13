@@ -51,7 +51,7 @@ An AI-powered SQL assistant that converts natural language questions into SQL qu
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone <repo-url>
 cd <your-project-folder>
 ````
 
@@ -102,7 +102,7 @@ This will:
 
 ---
 
-## 🧠 Train Agent Memory (Optional but Recommended)
+## 🧠 Train Agent Memory (Recommended)
 
 ```bash
 python seed_memory.py
