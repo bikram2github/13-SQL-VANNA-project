@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ```markdown
+=======
+
+>>>>>>> 964b3be6d6103bd807852ba4a94f8ade6d2d0a2a
 # 🧠 SQL AI Agent (Vanna + FastAPI + SQLite)
 
 An AI-powered SQL assistant that converts natural language questions into SQL queries, executes them on a SQLite database, and returns structured answers with optional visualizations.
@@ -51,7 +55,11 @@ An AI-powered SQL assistant that converts natural language questions into SQL qu
 ### 1. Clone the repository
 
 ```bash
+<<<<<<< HEAD
 git clone <your-repo-url>
+=======
+git clone <repo-url>
+>>>>>>> 964b3be6d6103bd807852ba4a94f8ade6d2d0a2a
 cd <your-project-folder>
 ````
 
@@ -102,7 +110,11 @@ This will:
 
 ---
 
+<<<<<<< HEAD
 ## 🧠 Train Agent Memory (Optional but Recommended)
+=======
+## 🧠 Train Agent Memory (Recommended)
+>>>>>>> 964b3be6d6103bd807852ba4a94f8ade6d2d0a2a
 
 ```bash
 python seed_memory.py
@@ -217,3 +229,10 @@ Answer: 200
 * 🧠 Smarter memory retrieval
 * 🌐 Frontend UI integration
 
+<<<<<<< HEAD
+=======
+---
+
+
+```
+>>>>>>> 964b3be6d6103bd807852ba4a94f8ade6d2d0a2a
