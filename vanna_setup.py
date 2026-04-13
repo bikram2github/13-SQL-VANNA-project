@@ -16,7 +16,6 @@ from vanna.integrations.local.agent_memory import DemoAgentMemory
 #from vanna.integrations.google import GeminiLlmService
 from vanna.integrations.openai import OpenAILlmService 
 from vanna.servers.fastapi import VannaFastAPIServer
-from vanna.tools import RunSqlTool
 from sql_validator import validate_sql
 load_dotenv()
 
@@ -24,21 +23,16 @@ load_dotenv()
 
 def create_llm(api_key):
     
-    llm = OpenAILlmService(
+    try :
+        llm = OpenAILlmService(
         api_key=os.getenv("GROQ_API_KEY"),
         base_url="https://api.groq.com/openai/v1",
         model="openai/gpt-oss-120b"  
-    )
+        )
+    except Exception as e:
+        print(f"Error initializing LLM: {e}")
+        raise e
     return llm
-
-def load_environment():
-    load_dotenv()
-    api_key = os.getenv("GOOGLE_API_KEY")
-
-    if not api_key:
-        raise ValueError("GOOGLE_API_KEY not found in .env")
-
-    return api_key
 
 
 
@@ -149,7 +143,13 @@ def setup_vanna():
         agent_memory=memory
     )
     agent.system_message = """
-        You are a SQLite expert.
+
+        You are a SQLite expert for a clinic database with these tables:
+        - patients(id, first_name, last_name, email, phone, date_of_birth, gender, city, registered_date)
+        - doctors(id, name, specialization, department, phone)
+        - appointments(id, patient_id, doctor_id, appointment_date, status, notes)
+        - treatments(id, appointment_id, treatment_name, cost, duration_minutes)
+        - invoices(id, patient_id, invoice_date, total_amount, paid_amount, status)
 
         IMPORTANT:
         - Always return final answer in this format:

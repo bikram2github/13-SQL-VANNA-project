@@ -1,4 +1,4 @@
-vanna[sqlite]
+vanna[sqlite,openai]
 fastapi 
 uvicorn[standard] 
 plotly 
@@ -6,4 +6,3 @@ pandas
 python-dotenv
 google-genai 
 groq
-vanna[openai]
